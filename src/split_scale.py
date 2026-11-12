@@ -68,19 +68,52 @@ def fit_scaler(X_train: np.ndarray):
 
 def apply_scaler(X: np.ndarray, scaler: np.ndarray) -> np.ndarray:
     """
-    Apply a pre-fit min-max scaler: X_scaled = (X - min) / range.
-    Result is in [0, 1] for training data; test/val may fall outside.
+    Apply a pre-fit scaler: X_scaled = (X - scaler[0]) / scaler[1].
+    With fit_scaler this is min-max: [0, 1] for training data; test/val
+    may fall outside. With fit_zscore it gives z-scores.
     """
     feat_min, feat_range = scaler[0], scaler[1]
     return (X - feat_min) / feat_range
 
 
 # ---------------------------------------------------------------------------
+# Z-score scaler (fit on train only), added for KNN in issue #11
+# ---------------------------------------------------------------------------
+def fit_zscore(X_train: np.ndarray):
+    """
+    Compute per-feature mean and standard deviation from X_train.
+
+    KNN measures distances, so every feature should count about the same.
+    Min-max squeezes a feature by its two most extreme days; z-scores use
+    the spread of all training days instead, which suits KNN better
+    (validation F1 0.672 instead of 0.626 at k=61).
+
+    Returns
+    -------
+    scaler : np.ndarray shape (2, n_features)
+        Row 0 = feature means, Row 1 = feature standard deviations.
+        A standard deviation of 0 is replaced by 1 to avoid division by zero.
+        Use it with apply_scaler, the same as the min-max scaler.
+    """
+    feat_mean = X_train.mean(axis=0)                 # shape (n_features,)
+    feat_std  = X_train.std(axis=0)                  # shape (n_features,)
+    # Protect against constant features
+    feat_std  = np.where(feat_std == 0, 1.0, feat_std)
+    return np.stack([feat_mean, feat_std], axis=0)   # shape (2, n_features)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-def make_splits(save: bool = True):
+def make_splits(save: bool = True, scaling: str = "minmax"):
     """
     Load features, split by time, scale, optionally save.
+
+    Parameters
+    ----------
+    save    : bool  Save the arrays to data/processed/.
+    scaling : str   "minmax" (default) or "zscore". Either way the scaler
+                    is fitted on the training years only.
 
     Returns
     -------
@@ -109,7 +142,12 @@ def make_splits(save: bool = True):
     dates_test  = [d for d, m in zip(dates, test_mask)  if m]
 
     # --- fit scaler on train only ---
-    scaler = fit_scaler(X_train)
+    if scaling == "minmax":
+        scaler = fit_scaler(X_train)
+    elif scaling == "zscore":
+        scaler = fit_zscore(X_train)
+    else:
+        raise ValueError('scaling must be "minmax" or "zscore"')
 
     X_train_sc = apply_scaler(X_train, scaler)
     X_val_sc   = apply_scaler(X_val,   scaler)
