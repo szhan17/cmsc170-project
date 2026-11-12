@@ -45,14 +45,14 @@ Citation requested by NASA:
 
 | Part | Issue | By | Status |
 |---|---|---|---|
-| CSV loader | [#5](https://github.com/szhan17/cmsc170-project/issues/5) | Timosan | Done |
-| Features and next-day labels | [#6](https://github.com/szhan17/cmsc170-project/issues/6) | Joyosa | Done |
-| Time split, scaling and test lock | [#7](https://github.com/szhan17/cmsc170-project/issues/7) | Joyosa | Done |
-| Metrics, written from scratch | [#9](https://github.com/szhan17/cmsc170-project/issues/9) | Joyosa | Done |
-| KNN | [#11](https://github.com/szhan17/cmsc170-project/issues/11) | Timosan, Pamulaklakin | Done |
-| Naive Bayes | [#12](https://github.com/szhan17/cmsc170-project/issues/12) | Pamulaklakin | Done |
-| Majority and persistence baselines | [#10](https://github.com/szhan17/cmsc170-project/issues/10) | Ellao | In progress |
-| Experiment runner and results files | [#13](https://github.com/szhan17/cmsc170-project/issues/13) | Ellao | In progress |
+| CSV loader | [#5]| Timosan | Done |
+| Features and next-day labels | [#6] | Joyosa | Done |
+| Time split, scaling and test lock | [#7] | Joyosa | Done |
+| Metrics, written from scratch | [#9]| Joyosa | Done |
+| KNN | [#11]| Timosan, Pamulaklakin | Done |
+| Naive Bayes | [#12]| Pamulaklakin | Done |
+| Majority and persistence baselines | [#10] | Ellao | Done |
+
 
 
 ### Split and metrics
@@ -66,6 +66,8 @@ Citation requested by NASA:
 
 | Method | Accuracy | Precision | Recall | F1 |
 |---|---|---|---|---|
+| Always dry (majority) | 0.582 | 0.000 | 0.000 | 0.000 |
+| Same as today (persistence) | 0.743 | 0.692 | 0.692 | 0.692 |
 | KNN (k=61, p=2) | 0.731 | 0.686 | 0.658 | 0.672 |
 | Naive Bayes (10 bins, smoothing 1) | 0.705 | 0.630 | 0.712 | 0.669 |
 
