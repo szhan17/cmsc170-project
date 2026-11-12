@@ -1,3 +1,9 @@
+# K-Nearest Neighbors classifier for issue #11 (builds on Exer06).
+# Written by szhan17. Pamulaklakin switched the validation run to z-scores
+# fitted on the training years and to the full score report.
+#
+# Run from the project root: python src/knn.py --k 61 --p 2
+
 from __future__ import annotations
 
 import argparse
@@ -9,7 +15,7 @@ import numpy as np
 
 # this lets the script use the project's existing evaluation and split helpers.
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from metrics import f1
+from metrics import print_report
 from split_scale import make_splits
 
 
@@ -99,18 +105,20 @@ def main() -> None:
     parser.add_argument("--p", type=float, default=2.0, help="Minkowski exponent")
     args = parser.parse_args()
 
-    # this loads the existing time split and train-scaled features without saving files.
-    splits = make_splits(save=False)
+    # this loads the existing time split without saving files. Distances need
+    # features on the same footing, so they are z-scores from the training years.
+    splits = make_splits(save=False, scaling="zscore")
     model = KNNClassifier(k=args.k, p=args.p)
     model.fit(splits["X_train"], splits["y_train"])
     predictions = model.predict(splits["X_val"])
 
-    # this reports the validation score without using the locked test split.
-    score = f1(splits["y_val"], predictions)
-    print(f"KNN validation results (k={model.k}, p={model.p:g})")
+    # this reports the validation scores without using the locked test split.
     print(f"Training samples: {len(splits['y_train'])}")
     print(f"Validation samples: {len(splits['y_val'])}")
-    print(f"Validation F1: {score:.4f}")
+    print_report(
+        splits["y_val"], predictions,
+        label=f"KNN validation (k={model.k}, p={model.p:g})",
+    )
 
 
 if __name__ == "__main__":

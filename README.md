@@ -30,8 +30,9 @@ python src/knn.py
 
 The default settings are `k=61` and `p=2`. You can pass other settings without
 keyboard input, for example `python src/knn.py --k 61 --p 2`. The script uses the
-existing time-based split and training-only scaling, then reports validation F1.
-It does not evaluate the locked test split.
+existing time-based split and z-scores from the training years (2001-2017), then
+prints accuracy, precision, recall, F1 and the confusion matrix for the validation
+years (2018-2021). It takes about 5 seconds. It does not evaluate the locked test split.
 
 ## Dataset
 
