@@ -30,6 +30,20 @@ existing time-based split and z-scores from the training years (2001-2017), then
 prints accuracy, precision, recall, F1 and the confusion matrix for the validation
 years (2018-2021). It takes about 5 seconds. It does not evaluate the locked test split.
 
+### Naive Bayes
+
+Run the Naive Bayes validation check from the project root:
+
+```bat
+python src/naive_bayes.py
+```
+
+The default settings are 10 bins per feature and smoothing 1, for example
+`python src/naive_bayes.py --bins 10 --smoothing 1`. Each feature is cut into
+equal-count bins using the training years (2001-2017), then the script prints
+accuracy, precision, recall, F1 and the confusion matrix for the validation years
+(2018-2021). It takes about a second. It does not evaluate the locked test split.
+
 ## Dataset
 
 NASA POWER daily point data (row 4 of the instructor's list of datasets), saved as `data/nasa_power_los_banos_2001_2025.csv`.
