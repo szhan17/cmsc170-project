@@ -36,11 +36,52 @@ Citation requested by NASA:
 
 > The data was obtained from National Aeronautics and Space Administration (NASA) Langley Research Center's Prediction Of Worldwide Energy Resources (POWER) project funded through the NASA Earth Science Division.
 
+## Project structure
+
+The number after each file is the issue that creates it. A file whose issue isn't merged yet doesn't exist yet.
+
+```text
+cmsc170-project/
+├── README.md                       setup, how to run, dataset, progress checklists
+├── requirements.txt                numpy and matplotlib only (#2)
+├── .gitignore                      keeps .venv/, __pycache__/ and data/processed/ out of git (#2)
+├── .github/
+│   ├── ISSUE_TEMPLATE/task.md      new issues start with Problem, Fix, Done when (#2)
+│   ├── pull_request_template.md    review checklist for every pull request (#2)
+│   └── workflows/                  banned-import check on every pull request (#8)
+├── data/
+│   ├── nasa_power_los_banos_2001_2025.csv   the dataset, never edited by hand (#3)
+│   └── processed/                  arrays made by src/split_scale.py, not committed
+├── src/                            all project code, run from the project root
+│   ├── data_loader.py              reads the CSV into one record per day (#5)
+│   ├── features.py                 14 features per day and tomorrow's label (#6)
+│   ├── split_scale.py              split by year, scaling, test lock (#7)
+│   ├── metrics.py                  confusion matrix, accuracy, precision, recall, F1 (#9)
+│   ├── baselines.py                majority and persistence (#10)
+│   ├── knn.py                      K-Nearest Neighbors (#11)
+│   ├── naive_bayes.py              Naive Bayes over binned features (#12)
+│   ├── perceptron.py               averaged Perceptron (Milestone 3)
+│   └── run.py                      runs one method and saves its scores (#13)
+├── tests/                          one test file per module in src/, e.g. test_data_loader.py
+├── tools/
+│   └── check_imports.py            fails if src/ imports a banned library (#8)
+├── results/                        one JSON file per run, the source of every reported number (#13)
+├── reports/
+│   └── milestone2.md               Milestone 2 progress report (#14)
+└── docs/                           GitHub Pages project page (later milestone)
+```
+
+Rules that keep this tidy:
+
+- Method and data code goes in `src/` only, and nothing in `src/` imports a banned library.
+- Generated files go in `results/` (committed) or `data/processed/` (not committed), never next to the code.
+- Your virtual environment `.venv/` stays on your computer. Everyone builds their own with the Setup commands above.
+
 ## Progress (Milestone 1: proposal and setup)
 
 When an issue's pull request is merged, tick its box and add who did it and who reviewed it, for example `(DelaCruz, reviewed by Reyes)`.
 
-- [ ] [#2](https://github.com/szhan17/cmsc170-project/issues/2) Setup: README links, templates and requirements.txt
+- [x] [#2](https://github.com/szhan17/cmsc170-project/issues/2) Setup: README links, templates and requirements.txt (Pamulaklakin, reviewed by _Surname_)
 - [x] [#3](https://github.com/szhan17/cmsc170-project/issues/3) Data: Add the dataset (Joyosa, merged in #17)
 
 ## Progress (Milestone 2: data and implementation)
