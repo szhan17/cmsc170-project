@@ -96,6 +96,7 @@ When an issue's pull request is merged, tick its box and add who did it and who 
 - [ ] [#12](https://github.com/szhan17/cmsc170-project/issues/12) Naive Bayes: Classifier with binned features
 - [ ] [#13](https://github.com/szhan17/cmsc170-project/issues/13) Eval: Experiment runner and results files
 - [ ] [#14](https://github.com/szhan17/cmsc170-project/issues/14) Docs: Milestone 2 report
+- [ ] [#20](https://github.com/szhan17/cmsc170-project/issues/20) Setup: Remove .venv from the repository
 
 ## Branch naming
 
