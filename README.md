@@ -2,10 +2,8 @@
 
 CMSC 170 AI Project. From today's weather in Los Baños, predict whether tomorrow will have at least 5 mm of rain, and compare three methods written from scratch: K-Nearest Neighbors, Naive Bayes and the Perceptron.
 
-**Group:** _group name_
-**Members:** _Member A, Member B, Member C, Member D_
-**Project page:** _link once GitHub Pages is live_
-**Slides:** _link before presentation day_
+**Group:** FEBS
+**Members:** Enzo Joyosa, Franz Jeremy Ellao, Brylle Pamulaklakin, Szhan Wayne Timosan
 
 ## Setup (first time only)
 
@@ -15,9 +13,6 @@ Run these from the project root.
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 ```
-
-`requirements.txt` lists only `numpy` and `matplotlib`. The course allows the Python standard library, NumPy (arrays and basic linear algebra only) and Matplotlib. Pandas, scikit-learn and any library that implements the methods are not allowed.
-
 ## Running
 
 ### K-Nearest Neighbors
