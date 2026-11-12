@@ -52,23 +52,23 @@ Citation requested by NASA:
 
 When an issue's pull request is merged, tick its box and add who did it and who reviewed it, for example `(DelaCruz, reviewed by Reyes)`.
 
-- [ ] [#1](https://github.com/OWNER/REPO/issues/1) Setup: Create the repository and settings
-- [ ] [#2](https://github.com/OWNER/REPO/issues/2) Setup: README, issue template and pull request template
-- [ ] [#3](https://github.com/OWNER/REPO/issues/3) Data: Add the dataset and the Milestone 1 record
-- [ ] [#4](https://github.com/OWNER/REPO/issues/4) Setup: Questions for the instructor
+- [x] [#1](https://github.com/OWNER/REPO/issues/1) Setup: Create the repository and settings
+- [x] [#2](https://github.com/OWNER/REPO/issues/2) Setup: README, issue template and pull request template
+- [x] [#3](https://github.com/OWNER/REPO/issues/3) Data: Add the dataset and the Milestone 1 record
+- [x] [#4](https://github.com/OWNER/REPO/issues/4) Setup: Questions for the instructor
 
 ## Progress (Milestone 2: data and implementation)
 
-- [ ] [#5](https://github.com/OWNER/REPO/issues/5) Data: CSV loader
-- [ ] [#6](https://github.com/OWNER/REPO/issues/6) Data: Features and next-day labels
-- [ ] [#7](https://github.com/OWNER/REPO/issues/7) Data: Time split, scaling and test lock
-- [ ] [#8](https://github.com/OWNER/REPO/issues/8) Setup: Pull request checks
-- [ ] [#9](https://github.com/OWNER/REPO/issues/9) Eval: Metrics
-- [ ] [#10](https://github.com/OWNER/REPO/issues/10) Eval: Majority and persistence baselines
-- [ ] [#11](https://github.com/OWNER/REPO/issues/11) KNN: Classifier
-- [ ] [#12](https://github.com/OWNER/REPO/issues/12) Naive Bayes: Classifier with binned features
-- [ ] [#13](https://github.com/OWNER/REPO/issues/13) Eval: Experiment runner and results files
-- [ ] [#14](https://github.com/OWNER/REPO/issues/14) Docs: Milestone 2 report
+- [x] [#5](https://github.com/OWNER/REPO/issues/5) Data: CSV loader
+- [x] [#6](https://github.com/OWNER/REPO/issues/6) Data: Features and next-day labels
+- [x] [#7](https://github.com/OWNER/REPO/issues/7) Data: Time split, scaling and test lock
+- [x] [#8](https://github.com/OWNER/REPO/issues/8) Setup: Pull request checks
+- [x] [#9](https://github.com/OWNER/REPO/issues/9) Eval: Metrics
+- [x] [#10](https://github.com/OWNER/REPO/issues/10) Eval: Majority and persistence baselines
+- [x] [#11](https://github.com/OWNER/REPO/issues/11) KNN: Classifier
+- [x] [#12](https://github.com/OWNER/REPO/issues/12) Naive Bayes: Classifier with binned features
+- [x] [#13](https://github.com/OWNER/REPO/issues/13) Eval: Experiment runner and results files
+- [x] [#14](https://github.com/OWNER/REPO/issues/14) Docs: Milestone 2 report
 
 ## Branch naming
 
