@@ -163,7 +163,7 @@ def print_report(y_true, y_pred, label: str = "Model") -> None:
     print(f"  Accuracy  : {m['accuracy']:.4f}")
     print(f"  Precision : {m['precision']:.4f}")
     print(f"  Recall    : {m['recall']:.4f}")
-    print(f"  F1        : {m['f1']:.4f}  ← main metric")
+    print(f"  F1        : {m['f1']:.4f}  <- main metric")
     print(f"\n  Confusion matrix (rows=true, cols=pred):")
     print(f"              Pred 0   Pred 1")
     print(f"  Actual 0  {m['TN']:8d} {m['FP']:8d}")
