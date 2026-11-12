@@ -1,0 +1,5 @@
+.venv/
+data/processed/
+data/*.csv
+__pycache__/
+*.pyc
