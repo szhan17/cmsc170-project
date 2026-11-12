@@ -46,8 +46,6 @@ Citation requested by NASA:
 
 ## Progress (Milestone 1: proposal and setup)
 
-When an issue's pull request is merged, tick its box and add who did it and who reviewed it, for example `(DelaCruz, reviewed by Reyes)`.
-
 - [x] [#1](https://github.com/OWNER/REPO/issues/1) Setup: Create the repository and settings
 - [x] [#2](https://github.com/OWNER/REPO/issues/2) Setup: README, issue template and pull request template
 - [x] [#3](https://github.com/OWNER/REPO/issues/3) Data: Add the dataset and the Milestone 1 record
