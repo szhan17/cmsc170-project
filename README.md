@@ -53,7 +53,7 @@ Citation requested by NASA:
 | Naive Bayes | [#12](https://github.com/szhan17/cmsc170-project/issues/12) | Pamulaklakin | Done |
 | Majority and persistence baselines | [#10](https://github.com/szhan17/cmsc170-project/issues/10) | Ellao | In progress |
 | Experiment runner and results files | [#13](https://github.com/szhan17/cmsc170-project/issues/13) | Ellao | In progress |
-| Banned-import check on pull requests | [#8](https://github.com/szhan17/cmsc170-project/issues/8) | Timosan | Not on `main` yet |
+
 
 ### Split and metrics
 
@@ -66,8 +66,6 @@ Citation requested by NASA:
 
 | Method | Accuracy | Precision | Recall | F1 |
 |---|---|---|---|---|
-| Always dry (majority) | 0.582 | 0.000 | 0.000 | 0.000 |
-| Same as today (persistence) | 0.743 | 0.692 | 0.692 | 0.692 |
 | KNN (k=61, p=2) | 0.731 | 0.686 | 0.658 | 0.672 |
 | Naive Bayes (10 bins, smoothing 1) | 0.705 | 0.630 | 0.712 | 0.669 |
 
