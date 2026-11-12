@@ -20,7 +20,18 @@ python -m venv .venv
 
 ## Running
 
-Each script gets its own section here, with its command and what it prints, as its issue is merged.
+### K-Nearest Neighbors
+
+Run the KNN validation check from the project root:
+
+```bat
+python src/knn.py
+```
+
+The default settings are `k=61` and `p=2`. You can pass other settings without
+keyboard input, for example `python src/knn.py --k 61 --p 2`. The script uses the
+existing time-based split and training-only scaling, then reports validation F1.
+It does not evaluate the locked test split.
 
 ## Dataset
 
