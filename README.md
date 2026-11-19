@@ -81,10 +81,9 @@ The two baselines were computed on the same split. Their script is #10.
 
 ### Plan for Milestone 3
 
-- Implement the Perceptron (shuffled each epoch, averaged weights)
-- Finish the baselines, the experiment runner and the import check (#10, #13, #8)
-- Tune k, p and the number of bins on the validation years
-- Compare all methods with tables, graphs and McNemar's test
+- Implement the Perceptron from scratch
+- Run every method with our own metrics
+- Compare all methods with tables and graphs
 
 ## Branch naming
 
