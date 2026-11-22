@@ -1,0 +1,21 @@
+{
+  "method": "majority",
+  "settings": {},
+  "train_years": "2001-2017",
+  "validation_years": "2018-2021",
+  "train_samples": 6209,
+  "validation_samples": 1461,
+  "scores": {
+    "accuracy": 0.5818,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "confusion_matrix": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 611,
+    "TN": 850
+  },
+  "run_time_seconds": 0.001
+}

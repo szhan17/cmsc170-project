@@ -23,6 +23,7 @@ Run these from the project root. Each method trains on 2001-2017 and prints accu
 |---|---|---|
 | `python src/knn.py` | `--k 61 --p 2` (z-scores from the training years) | about 5 s |
 | `python src/naive_bayes.py` | `--bins 10 --smoothing 1` (equal-count bins from the training years) | about 1 s |
+| `python src/run.py` | every method with the settings above; saves `results/<method>.json` | about 5 s |
 | `python -m unittest tests.test_data_loader tests.test_knn` | unit tests | under 1 s |
 
 ## Dataset
