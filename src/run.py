@@ -60,17 +60,18 @@ def run_method(method, args, splits):
         return model.predict(data["X_val"]), settings
 
     if method == "perceptron":
-        from perceptron import PerceptronClassifier
-
-        # Only pass the settings given on the command line, so the class
-        # defaults from #24 are used otherwise.
-        given = {"epochs": args.epochs, "lr": args.lr, "seed": args.seed}
-        given = {name: value for name, value in given.items() if value is not None}
+        # Issue #24 supplies an Averaged Perceptron, while Issue #26 tunes
+        # epochs and learning rate. Use the same averaged implementation as
+        # the tuning script so the tuned settings are runnable here.
+        from tune import averaged_perceptron_fit_predict
         data = splits["zscore"]
-        model = PerceptronClassifier(**given).fit(data["X_train"], data["y_train"])
-        settings = {name: getattr(model, name, given.get(name)) for name in ("epochs", "lr", "seed")}
-        settings["scaling"] = "zscore"
-        return model.predict(data["X_val"]), settings
+        pred = averaged_perceptron_fit_predict(
+            data["X_train"], data["y_train"], data["X_val"],
+            epochs=args.epochs, lr=args.lr, seed=args.seed,
+        )
+        settings = {"epochs": args.epochs, "learning_rate": args.lr,
+                    "seed": args.seed, "scaling": "zscore"}
+        return pred, settings
 
     raise ValueError(f"unknown method: {method}")
 
@@ -99,13 +100,13 @@ def save_result(method, settings, y_val, predictions, seconds, n_train):
 def main():
     parser = argparse.ArgumentParser(description="Run the methods on the validation years and save the results.")
     parser.add_argument("--method", choices=METHODS + ["all"], default="all")
-    parser.add_argument("--k", type=int, default=61, help="KNN: number of neighbors")
+    parser.add_argument("--k", type=int, default=81, help="KNN: number of neighbors (Issue #26 tuned default)")
     parser.add_argument("--p", type=float, default=2.0, help="KNN: Minkowski exponent")
     parser.add_argument("--bins", type=int, default=10, help="Naive Bayes: bins per feature")
-    parser.add_argument("--smoothing", type=float, default=1.0, help="Naive Bayes: Laplace smoothing")
-    parser.add_argument("--epochs", type=int, default=None, help="Perceptron: passes over the training years")
-    parser.add_argument("--lr", type=float, default=None, help="Perceptron: learning rate")
-    parser.add_argument("--seed", type=int, default=None, help="Perceptron: shuffle seed")
+    parser.add_argument("--smoothing", type=float, default=0.1, help="Naive Bayes: Laplace smoothing (Issue #26 tuned default)")
+    parser.add_argument("--epochs", type=int, default=10, help="Perceptron: passes over the training years (tuned default)")
+    parser.add_argument("--lr", type=float, default=0.01, help="Perceptron: learning rate (tuned default)")
+    parser.add_argument("--seed", type=int, default=42, help="Perceptron: shuffle seed")
     args = parser.parse_args()
 
     methods = list(METHODS) if args.method == "all" else [args.method]
