@@ -74,6 +74,9 @@ class AveragedPerceptron:
     ----------
     n_epochs : int
         Number of passes over the training data.
+    lr : float
+        Learning rate, the size of each weight update. The weights start at
+        zero, so it only rescales them and does not change the predictions.
     seed : int
         Random seed for epoch shuffling (ensures reproducibility).
 
@@ -85,8 +88,9 @@ class AveragedPerceptron:
         Final averaged bias term (set after fit).
     """
 
-    def __init__(self, n_epochs: int = 10, seed: int = 42):
+    def __init__(self, n_epochs: int = 10, seed: int = 42, lr: float = 0.01):
         self.n_epochs = n_epochs
+        self.lr       = lr
         self.seed     = seed
         self.w        = None
         self.b        = None
@@ -127,8 +131,8 @@ class AveragedPerceptron:
 
                 # Update only on misclassification
                 if y_pred_pm != y_pm[i]:
-                    w = w + y_pm[i] * X[i]
-                    b = b + y_pm[i]
+                    w = w + self.lr * y_pm[i] * X[i]
+                    b = b + self.lr * y_pm[i]
 
                 # Accumulate after every sample (not just on mistakes)
                 w_sum = w_sum + w
@@ -138,6 +142,7 @@ class AveragedPerceptron:
         # Averaged weights
         self.w = w_sum / count
         self.b = b_sum / count
+        return self
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -206,4 +211,4 @@ if __name__ == "__main__":
     model2.fit(X_train_z, y_train)
     y_pred2 = model2.predict(X_val_z)
     same = np.array_equal(y_pred_val, y_pred2)
-    print(f"Same seed gives same result: {'YES ✓' if same else 'NO ✗'}")
+    print(f"Same seed gives same result: {'Yes' if same else 'No'}")
