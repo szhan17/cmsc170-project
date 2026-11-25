@@ -20,16 +20,11 @@ from baselines import majority_predict, persistence_predict
 from knn import KNNClassifier
 from metrics import all_metrics
 from naive_bayes import NaiveBayesClassifier
+from perceptron import AveragedPerceptron
 from split_scale import TRAIN_END_YEAR, VAL_END_YEAR, make_splits
 
 RESULTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "results")
 METHODS = ["majority", "persistence", "knn", "naive_bayes", "perceptron"]
-
-
-def perceptron_available():
-    # The Perceptron comes from issue #24. Until src/perceptron.py is on main,
-    # the runner skips it instead of crashing.
-    return os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), "perceptron.py"))
 
 
 def run_method(method, args, splits):
@@ -60,18 +55,12 @@ def run_method(method, args, splits):
         return model.predict(data["X_val"]), settings
 
     if method == "perceptron":
-        # Issue #24 supplies an Averaged Perceptron, while Issue #26 tunes
-        # epochs and learning rate. Use the same averaged implementation as
-        # the tuning script so the tuned settings are runnable here.
-        from tune import averaged_perceptron_fit_predict
         data = splits["zscore"]
-        pred = averaged_perceptron_fit_predict(
-            data["X_train"], data["y_train"], data["X_val"],
-            epochs=args.epochs, lr=args.lr, seed=args.seed,
-        )
+        model = AveragedPerceptron(n_epochs=args.epochs, seed=args.seed, lr=args.lr)
+        model.fit(data["X_train"], data["y_train"])
         settings = {"epochs": args.epochs, "learning_rate": args.lr,
                     "seed": args.seed, "scaling": "zscore"}
-        return pred, settings
+        return model.predict(data["X_val"]), settings
 
     raise ValueError(f"unknown method: {method}")
 
@@ -110,12 +99,6 @@ def main():
     args = parser.parse_args()
 
     methods = list(METHODS) if args.method == "all" else [args.method]
-    if "perceptron" in methods and not perceptron_available():
-        if args.method == "perceptron":
-            sys.exit("src/perceptron.py is not on main yet (issue #24).")
-        print("Skipping the Perceptron: src/perceptron.py is not on main yet (issue #24).")
-        methods.remove("perceptron")
-
     splits = {
         "minmax": make_splits(save=False, scaling="minmax"),
         "zscore": make_splits(save=False, scaling="zscore"),

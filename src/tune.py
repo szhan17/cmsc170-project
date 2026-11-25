@@ -15,6 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from split_scale import make_splits
 from knn import KNNClassifier
 from naive_bayes import NaiveBayesClassifier
+from perceptron import AveragedPerceptron
 from metrics import all_metrics
 
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,21 +27,6 @@ KNN_GRID=list(product([21,41,61,81],[1.0,2.0,3.0]))
 NB_GRID=list(product([5,8,10,12],[0.1,0.5,1.0,2.0]))
 PERCEPTRON_GRID=list(product([5,10,20,30,50],[0.01,0.05,0.1,0.5]))
 SEED=42
-
-
-def averaged_perceptron_fit_predict(X_train,y_train,X_val,epochs,lr,seed=SEED):
-    """From-scratch averaged binary Perceptron with tunable learning rate."""
-    X=np.asarray(X_train,dtype=float); y=np.where(np.asarray(y_train)==1,1.0,-1.0)
-    w=np.zeros(X.shape[1]); b=0.0; w_sum=np.zeros_like(w); b_sum=0.0; count=0
-    rng=np.random.default_rng(seed)
-    for _ in range(epochs):
-        for i in rng.permutation(len(y)):
-            pred=1.0 if np.dot(w,X[i])+b>=0 else -1.0
-            if pred != y[i]:
-                w += lr*y[i]*X[i]; b += lr*y[i]
-            w_sum += w; b_sum += b; count += 1
-    w_avg=w_sum/count; b_avg=b_sum/count
-    return (np.asarray(X_val).dot(w_avg)+b_avg>=0).astype(np.int32)
 
 
 def evaluate(y,pred,method,settings,elapsed):
@@ -97,7 +83,8 @@ def main():
     rows=[]
     for epochs,lr in PERCEPTRON_GRID:
         start=time.perf_counter()
-        pred=averaged_perceptron_fit_predict(zs["X_train"],zs["y_train"],zs["X_val"],epochs,lr)
+        model=AveragedPerceptron(n_epochs=epochs,seed=SEED,lr=lr).fit(zs["X_train"],zs["y_train"])
+        pred=model.predict(zs["X_val"])
         rows.append(evaluate(y_val,pred,"perceptron",{"epochs":epochs,"learning_rate":lr,"seed":SEED,"scaling":"zscore"},time.perf_counter()-start))
     best=choose_best(rows);best_by_method["perceptron"]=best;all_rows+=rows
     save_csv(os.path.join(TUNE_DIR,"perceptron_tuning.csv"),rows)

@@ -2,7 +2,7 @@
   "method": "naive_bayes",
   "settings": {
     "bins": 10,
-    "smoothing": 1.0,
+    "smoothing": 0.1,
     "scaling": "minmax"
   },
   "train_years": "2001-2017",
@@ -21,5 +21,5 @@
     "FN": 176,
     "TN": 595
   },
-  "run_time_seconds": 0.098
+  "run_time_seconds": 0.068
 }

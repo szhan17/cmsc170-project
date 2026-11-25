@@ -1,7 +1,7 @@
 {
   "method": "knn",
   "settings": {
-    "k": 61,
+    "k": 81,
     "p": 2.0,
     "scaling": "zscore"
   },
@@ -10,16 +10,16 @@
   "train_samples": 6209,
   "validation_samples": 1461,
   "scores": {
-    "accuracy": 0.731,
-    "precision": 0.686,
-    "recall": 0.6579,
+    "accuracy": 0.7337,
+    "precision": 0.6934,
+    "recall": 0.6514,
     "f1": 0.6717
   },
   "confusion_matrix": {
-    "TP": 402,
-    "FP": 184,
-    "FN": 209,
-    "TN": 666
+    "TP": 398,
+    "FP": 176,
+    "FN": 213,
+    "TN": 674
   },
-  "run_time_seconds": 4.457
+  "run_time_seconds": 3.748
 }
