@@ -17,7 +17,7 @@ Only the Python standard library, NumPy and Matplotlib are allowed. Pandas, scik
 
 ## Running
 
-Run these from the project root. Each method trains on 2001-2017 and prints accuracy, precision, recall, F1 and the confusion matrix for the validation years (2018-2021). None of them touch the locked test years.
+Run these from the project root. Each method trains on 2001-2017 and prints accuracy, precision, recall, F1 and the confusion matrix for the validation years (2018-2021). Only `python src/run.py --final` uses the locked test years.
 
 | Command | Default settings | Time |
 |---|---|---|
@@ -27,6 +27,8 @@ Run these from the project root. Each method trains on 2001-2017 and prints accu
 | `python src/tune.py` | tries 48 settings on the validation years; saves the scores to `results/tuning/` | about 1 min |
 | `python src/run.py` | every method with the tuned settings from `results/tuning/` (KNN `--k 81`, Naive Bayes `--smoothing 0.1`); saves `results/<method>.json` | about 5 s |
 | `python src/compare.py` | reads `results/*.json`, prints the comparison table, saves the table and graphs (F1 bars, all metrics, confusion matrices) to `figures/` | about 2 s |
+| `python src/run.py --final` | final run: every method with the tuned settings, scored once on the test years (2022-2025); saves `results/test/<method>.json`. It refuses changed settings | about 5 s |
+| `python src/compare.py --results-dir results/test --figures-dir figures/test` | the same table and graphs for the test years, saved to `figures/test/` | about 2 s |
 
 ## Dataset
 

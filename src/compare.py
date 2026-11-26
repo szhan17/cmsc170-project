@@ -158,6 +158,10 @@ def save_markdown_table(results, figures_dir):
     if "train_years" in first and "validation_years" in first:
         heading = heading + " " + first["validation_years"]
         heading = heading + " (trained on " + first["train_years"] + ")"
+    # results from the final run (src/run.py --final) are on the test years.
+    if "train_years" in first and "test_years" in first:
+        heading = "Comparison on the test years " + first["test_years"]
+        heading = heading + " (trained on " + first["train_years"] + ")"
 
     path = os.path.join(figures_dir, "comparison_table.md")
     with open(path, "w", encoding="utf-8") as file:
