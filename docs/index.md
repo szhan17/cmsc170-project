@@ -205,7 +205,7 @@ Figures (confusion matrices and F1 bar chart) are in the `figures/` and `figures
 
 The Perceptron achieved the highest F1 on both the validation set (0.7065) and the test set (0.7580), making it the best-performing method in this project. Its linear decision boundary, combined with averaging over all weight updates, produced a stable and well-calibrated classifier.
 
-The Persistence baseline — predicting tomorrow's weather will be the same as today's — was surprisingly strong (validation F1 0.6923, test F1 0.7504). This reflects the autocorrelated nature of rainfall: rainy days tend to cluster together during the wet season. Any learned method must beat this baseline to be useful, and all three did on the test set.
+The Persistence baseline — predicting tomorrow's weather will be the same as today's — was surprisingly strong (validation F1 0.6923, test F1 0.7504). This reflects the autocorrelated nature of rainfall: rainy days tend to cluster together during the wet season. Any learned method must beat this baseline to add value beyond repeating today's rain, and only the Perceptron did so on both validation (0.7065 vs. 0.6923) and test (0.7580 vs. 0.7504).
 
 KNN (validation F1 0.6717, test F1 0.7154) performed moderately well. Its main weakness is that it relies on distance in a 14-dimensional space, where features with different scales can dominate unless carefully normalised. It was also the slowest method (~3.7 s on validation), since it computes distances to every training sample at prediction time.
 
@@ -232,7 +232,7 @@ This project compared three machine learning methods — K-Nearest Neighbors, Na
 
 All three methods were implemented from scratch using only Python's standard library, NumPy, and Matplotlib, and evaluated with a strict time-based split to prevent data leakage.
 
-The Perceptron was the strongest method, achieving a test F1 of 0.7580, surpassing both baselines and the other two classifiers. Naive Bayes was the best at catching rainy days (highest recall), while KNN offered a middle ground. All three methods beat the majority baseline by a large margin, and all three beat the persistence baseline on the test set — confirming that learning from historical weather features adds genuine predictive value beyond simply repeating today's observation.
+The Perceptron was the strongest method, achieving a test F1 of 0.7580, surpassing both baselines and the other two classifiers. Naive Bayes was the best at catching rainy days (highest recall), while KNN offered a middle ground. All three methods beat the majority baseline by a large margin, while only the Perceptron beat the persistence baseline on both validation (0.7065 vs. 0.6923) and test (0.7580 vs. 0.7504) — showing that a linear model trained on all 14 weather features can edge out simply repeating today's rain, whereas KNN (0.7154) and Naive Bayes (0.7408) fell slightly short on test F1.
 
 The project demonstrated that simple, interpretable models can perform well on weather prediction when given clean, well-engineered features and a fair evaluation setup.
 
