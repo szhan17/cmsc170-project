@@ -89,6 +89,49 @@ The two baselines were computed on the same split. Their script is #10.
 - Run every method with our own metrics
 - Compare all methods with tables and graphs
 
+## Milestone 3 report: comparison
+
+### What was done
+
+| Part | Issue | By | Status |
+|---|---|---|---|
+| Perceptron | [#24](https://github.com/szhan17/cmsc170-project/issues/24) | Joyosa | Done |
+| Experiment runner and results files | [#13](https://github.com/szhan17/cmsc170-project/issues/13) | Pamulaklakin, from Ellao's first version | Done |
+| Comparison table and graphs | [#25](https://github.com/szhan17/cmsc170-project/issues/25) | Timosan | Done |
+| Tuning on the validation years | [#26](https://github.com/szhan17/cmsc170-project/issues/26) | Ellao | Done |
+
+The metrics from Milestone 2 are our own and are used unchanged.
+
+### Comparison (validation years 2018-2021, tuned settings)
+
+| Method | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| Always dry (majority) | 0.582 | 0.000 | 0.000 | 0.000 |
+| Same as today (persistence) | 0.743 | 0.692 | 0.692 | 0.692 |
+| KNN (k=81, p=2) | 0.734 | 0.693 | 0.651 | 0.672 |
+| Naive Bayes (10 bins, smoothing 0.1) | 0.705 | 0.630 | 0.712 | 0.669 |
+| Perceptron (10 epochs, learning rate 0.01, seed 42) | 0.761 | 0.727 | 0.687 | **0.707** |
+
+![F1 by method](figures/f1_comparison.png)
+
+- The Perceptron is the only method that beats persistence on F1, by less than 0.015.
+- Naive Bayes finds the most rainy days of our methods but gives the most false alarms (255).
+- Tuning moved KNN from k=61 to k=81, but its F1 stayed at 0.672.
+
+More graphs are in `figures/`, and the score of every setting tried is in `results/tuning/`.
+
+### Problems met
+
+- The Perceptron and the runner used different class names, and the tuning script had a second copy of the Perceptron. Both now use the one in `src/perceptron.py`.
+- The learning rate did not change the Perceptron's scores, because its weights start at zero.
+- The split code still returns the test years to any script, so they stay unused by rule until the final run.
+
+### Plan for Milestone 4
+
+- Run every method once on the test years (2022-2025) with the tuned settings
+- Make the final comparison tables and figures
+- Complete the GitHub project page
+
 ## Branch naming
 
 Name each branch after the issue it fixes: `<issue number>-<Surname>`.
