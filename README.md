@@ -27,7 +27,6 @@ Run these from the project root. Each method trains on 2001-2017 and prints accu
 | `python src/tune.py` | tries 48 settings on the validation years; saves the scores to `results/tuning/` | about 1 min |
 | `python src/run.py` | every method with the tuned settings from `results/tuning/` (KNN `--k 81`, Naive Bayes `--smoothing 0.1`); saves `results/<method>.json` | about 5 s |
 | `python src/compare.py` | reads `results/*.json`, prints the comparison table, saves the table and graphs (F1 bars, all metrics, confusion matrices) to `figures/` | about 2 s |
-| `python -m unittest tests.test_data_loader tests.test_knn tests.test_compare` | unit tests | under 3 s |
 
 ## Dataset
 
