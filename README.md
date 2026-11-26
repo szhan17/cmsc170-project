@@ -135,6 +135,53 @@ More graphs are in `figures/`, and the score of every setting tried is in `resul
 - Make the final comparison tables and figures
 - Complete the GitHub project page
 
+## Milestone 4 report: full results
+
+Project page: https://szhan17.github.io/cmsc170-project/
+
+### What was done
+
+| Part | Issue | By | Status |
+|---|---|---|---|
+| Final run on the test years | [#32](https://github.com/szhan17/cmsc170-project/issues/32) | Pamulaklakin | Done |
+| Project page setup | [#33](https://github.com/szhan17/cmsc170-project/issues/33) | Ellao | Done |
+| Project page: dataset, methods, setup, figures | [#34](https://github.com/szhan17/cmsc170-project/issues/34) | Timosan | Done |
+| Project page: results, discussion, conclusion, task log | [#35](https://github.com/szhan17/cmsc170-project/issues/35) | Joyosa | Done |
+
+All three methods were already tuned in Milestone 3, and the settings were not changed after the test run. Unit tests are not required by the specs, so the `tests/` folder was removed.
+
+### Results on the test years (2022-2025, 701 rainy days out of 1,460)
+
+Trained on 2001-2017 with the tuned settings and scored once with `python src/run.py --final`.
+
+| Method | Accuracy | Precision | Recall | F1 |
+|---|---|---|---|---|
+| Always dry (majority) | 0.520 | 0.000 | 0.000 | 0.000 |
+| Same as today (persistence) | 0.760 | 0.750 | 0.750 | 0.750 |
+| KNN (k=81, p=2) | 0.736 | 0.742 | 0.690 | 0.715 |
+| Naive Bayes (10 bins, smoothing 0.1) | 0.734 | 0.695 | 0.793 | 0.741 |
+| Perceptron (10 epochs, learning rate 0.01, seed 42) | 0.768 | 0.759 | 0.757 | **0.758** |
+
+![Test F1 by method](figures/test/f1_comparison.png)
+
+- The Perceptron has the best accuracy and F1 on both the validation and the test years, and is the only method that beats persistence on both.
+- Its lead over persistence shrank from 0.015 on validation to 0.008 on test.
+- Naive Bayes again has the highest recall (0.793), and moved ahead of KNN on F1.
+- Every score is higher than on validation because the test years are rainier (48% rainy days against 42%).
+
+The full tables and figures are on the project page and in `figures/test/`.
+
+### Problems met
+
+- The first draft of the page said all three methods beat persistence on the test years. Only the Perceptron does, and the page was corrected.
+- GitHub Pages serves only the `docs/` folder, so the figures did not load on the page. They were copied into `docs/figures/`.
+
+### Plan for presentation day
+
+- Finish the slides and add their link to the project page
+- Every member presents a part and can answer questions on any part
+- Submit the peer evaluation forms
+
 ## Branch naming
 
 Name each branch after the issue it fixes: `<issue number>-<Surname>`.
