@@ -27,7 +27,7 @@ Who did what, taken from the README milestone reports, the merged pull requests 
 
 | Issue | Task | By | Pull request |
 |---|---|---|---|
-| #13 | Experiment runner and results files | Pamulaklakin, from Ellao's first version | |
+| #13 | Experiment runner and results files | Pamulaklakin, from Ellao's first version | #27 |
 | #24 | Perceptron: first version, then merged into one shared Perceptron | Joyosa, Ellao, Pamulaklakin | #29, #31 |
 | #25 | Comparison table, graphs and unit tests | Timosan | #28 |
 | #26 | Tuning on the validation years | Ellao | #30 |
@@ -38,8 +38,9 @@ Who did what, taken from the README milestone reports, the merged pull requests 
 |---|---|---|---|
 | #32 | Final run on the test years | Pamulaklakin | #37 |
 | #33 | Project page (`docs/index.md`) | Ellao | #38 |
-| #35 | Project page results, discussion, conclusion, task log and README fixes | Joyosa | |
+| #34 | Project page dataset, methods, experimental setup, figures and fixes | Timosan | |
+| #35 | Project page results, discussion, conclusion, task log and README fixes | Joyosa | #39 |
 
 ## AI tool use
 
-Joyosa used Claude (claude.ai) to help write and comment `features.py`, `split_scale.py`, `metrics.py`, `perceptron.py` and the project page text. Each file carries a disclosure comment on its first line, and every line was run and checked by the author.
+AI tools (Claude by Anthropic, ChatGPT by OpenAI, and Gemini via Antigravity) were used during the project for debugging, code comments, and documentation review. Joyosa also noted Claude use at the top of `features.py`, `split_scale.py`, `metrics.py`, and `perceptron.py`. Every file and result was run and checked by the group.
