@@ -1,0 +1,25 @@
+{
+  "method": "knn",
+  "settings": {
+    "k": 81,
+    "p": 2.0,
+    "scaling": "zscore"
+  },
+  "train_years": "2001-2017",
+  "test_years": "2022-2025",
+  "train_samples": 6209,
+  "test_samples": 1460,
+  "scores": {
+    "accuracy": 0.7363,
+    "precision": 0.7423,
+    "recall": 0.6904,
+    "f1": 0.7154
+  },
+  "confusion_matrix": {
+    "TP": 484,
+    "FP": 168,
+    "FN": 217,
+    "TN": 591
+  },
+  "run_time_seconds": 2.588
+}
