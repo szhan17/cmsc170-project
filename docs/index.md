@@ -185,6 +185,12 @@ Two notes from tuning (`results/tuning/all_settings.csv`):
 | Naive Bayes | 0.7050 | 0.6304 | 0.7119 | 0.6687 |
 | **Perceptron** | **0.7611** | **0.7266** | **0.6874** | **0.7065** |
 
+![Validation F1 by method](figures/f1_comparison.png)
+
+![Validation metrics by method](figures/metrics_comparison.png)
+
+![Validation confusion matrices](figures/confusion_matrices.png)
+
 ### Test Set (2022–2025)
 
 | Method | Accuracy | Precision | Recall | F1 |
@@ -195,7 +201,11 @@ Two notes from tuning (`results/tuning/all_settings.csv`):
 | Naive Bayes | 0.7336 | 0.6950 | 0.7932 | 0.7408 |
 | **Perceptron** | **0.7678** | **0.7586** | **0.7575** | **0.7580** |
 
-Figures (confusion matrices and F1 bar chart) are in the `figures/` and `figures/test/` folders of the repository.
+![Test F1 by method](figures/test/f1_comparison.png)
+
+![Test metrics by method](figures/test/metrics_comparison.png)
+
+![Test confusion matrices](figures/test/confusion_matrices.png)
 
 ---
 
