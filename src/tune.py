@@ -1,7 +1,7 @@
 """Issue #26: tune model settings on the fixed validation period.
 
-Train: 2001-2017. Validation: 2018-2021. Test years are not loaded,
-examined, or scored by this script. Run from the project root:
+Train: 2001-2017. Validation: 2018-2021. make_splits also returns the test
+years, but this script never uses or scores them. Run from the project root:
     python src/tune.py
 
 The main selection metric is validation F1 for the rainy class (label 1).
@@ -9,7 +9,6 @@ All scaler statistics and Naive Bayes bin cut points are learned from train only
 """
 import csv, json, os, sys, time
 from itertools import product
-import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from split_scale import make_splits

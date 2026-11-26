@@ -2,7 +2,7 @@
 
 ## Goal and evaluation protocol
 
-This tuning experiment searches model hyperparameters using the fixed training and validation periods only. Training data: 2001–2017. Validation data: 2018–2021. The locked test period (2022 onward) is not loaded or evaluated by this tuning script.
+This tuning experiment searches model hyperparameters using the fixed training and validation periods only. Training data: 2001–2017. Validation data: 2018–2021. The locked test period (2022 onward) is never used or scored by this tuning script.
 
 The selection metric is **F1 for the rainy class (label 1)**. Ties are resolved by recall, then accuracy. Scalers are fitted on the training portion only.
 
