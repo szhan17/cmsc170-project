@@ -1,20 +1,7 @@
 # RAIN RAIN GO AWAY OR GO HERE
 ### Will Los Baños get at least 5 mm of rain tomorrow?
 
-**CMSC 170 – Introduction to Artificial Intelligence**  
-**Group FEBS**
-
-- Enzo Joyosa
-- Franz Jeremy Ellao
-- Brylle Pamulaklakin
-- Szhan Wayne Timosan
-
----
-
 ## 1. Title and Group Members
-
-# RAIN RAIN GO AWAY OR GO HERE
-### Will Los Baños get at least 5 mm of rain tomorrow?
 
 This project is developed by Group FEBS as part of CMSC 170: Introduction to Artificial Intelligence at the University of the Philippines Los Baños.
 
@@ -68,7 +55,7 @@ Each sample has **14 features** (`src/features.py`): 10 direct daily weather mea
 | `WD10M_sin`, `WD10M_cos` | Sine and cosine of 10 m wind direction (`WD10M` in radians) |
 | `DOY_sin`, `DOY_cos` | Sine and cosine of day of the year (accounting for leap years) |
 
-Three extra columns in the raw download (`T2MDEW`, `WS2M`, and `CLRSKY_SFC_SW_DWN`) are checked by the CSV loader (`src/data_loader.py`) but left out of the 14-feature matrix. Raw `WD10M` is replaced by `WD10M_sin` and `WD10M_cos`.
+Three extra columns in the raw download (`T2MDEW`, `WS2M`, and `CLRSKY_SFC_SW_DWN`) are present in the CSV but left out of the 14-feature matrix. Raw `WD10M` is replaced by `WD10M_sin` and `WD10M_cos`.
 
 ### Target Variable
 
@@ -81,7 +68,7 @@ The target is a binary next-day rain label built from tomorrow's `PRECTOTCORR`:
 
 All loading, feature creation, splitting, and scaling were written from scratch using Python's standard library and NumPy (no pandas or scikit-learn):
 
-1. **CSV reading and checks (`src/data_loader.py`, `src/features.py`):** Skips the NASA metadata lines before the `YEAR,MO,DY,...` header, parses rows with Python's `csv` module, and verifies there are no missing columns, `-999` missing-value markers, non-finite numbers, or skipped dates.
+1. **CSV reading and dataset checks (`src/features.py`, `src/data_loader.py`):** We checked the downloaded CSV with `src/data_loader.py` to confirm there are no missing columns, `-999` missing-value markers, non-finite numbers, or skipped dates. When training and evaluating models, `src/features.py` skips the NASA metadata lines before the `YEAR,MO,DY,...` header and reads the daily rows directly with Python's `csv` module.
 2. **Circular encoding (`src/features.py`):** Wind direction wraps around at 0°/360° and day of the year wraps around between December 31 and January 1. Turning both into `(sin, cos)` pairs keeps nearby angles and dates close together numerically.
 3. **Next-day alignment (`src/features.py`):** Pairs day `t`'s 14 features with day `t + 1`'s rain label (`9,130` samples total).
 4. **Train-only scaling (`src/split_scale.py`):** Every scaler is fitted on the training years (`2001–2017`) only and then applied to validation and test so no information leaks from future years:
@@ -213,11 +200,11 @@ Two notes from tuning (`results/tuning/all_settings.csv`):
 
 ### Performance Analysis
 
-The Perceptron achieved the highest F1 on both the validation set (0.7065) and the test set (0.7580), making it the best-performing method in this project. Its linear decision boundary, combined with averaging over all weight updates, produced a stable and well-calibrated classifier.
+The Perceptron achieved the highest F1 on both the validation set (0.7065) and the test set (0.7580), making it the best-performing method in this project. Its linear decision boundary, combined with averaging over all weight updates, produced a stable classifier.
 
 The Persistence baseline — predicting tomorrow's weather will be the same as today's — was surprisingly strong (validation F1 0.6923, test F1 0.7504). This reflects the autocorrelated nature of rainfall: rainy days tend to cluster together during the wet season. Any learned method must beat this baseline to add value beyond repeating today's rain, and only the Perceptron did so on both validation (0.7065 vs. 0.6923) and test (0.7580 vs. 0.7504).
 
-KNN (validation F1 0.6717, test F1 0.7154) performed moderately well. Its main weakness is that it relies on distance in a 14-dimensional space, where features with different scales can dominate unless carefully normalised. It was also the slowest method (~3.7 s on validation), since it computes distances to every training sample at prediction time.
+KNN (validation F1 0.6717, test F1 0.7154) performed moderately well. Its main weakness is that it relies on distance in a 14-dimensional space where every feature counts equally, even after z-score scaling, so weaker features still affect the distance. It was also the slowest method (~3.7 s on validation), since it computes distances to every training sample at prediction time.
 
 Naive Bayes (validation F1 0.6687, test F1 0.7408) had the highest recall on the test set (0.7932), meaning it caught the most actual rainy days. However, its precision was lower, indicating more false alarms. The binning of continuous features introduces information loss, and the conditional independence assumption does not hold perfectly for correlated weather variables such as temperature and humidity.
 
