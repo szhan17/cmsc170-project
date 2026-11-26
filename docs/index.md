@@ -261,11 +261,14 @@ The daily weather dataset used in this project was obtained from NASA POWER:
 
 ### AI Tool Disclosure
 
-AI tools, including Claude (claude.ai) by Anthropic and ChatGPT by OpenAI, were used as assistance during the development of this project for guidance, troubleshooting, documentation, and writing support. All code, implementations, experimental results, and conclusions are subject to review and verification by the project members.
+AI tools (Claude by Anthropic, ChatGPT by OpenAI, and Gemini via Antigravity) were used to help with debugging, comments, and documentation review. Every piece of code, result, and claim was checked and verified by the group.
 
 ### Other References
 
-*Additional references, documentation, and sources used in the implementation and analysis will be listed here.*
+- Freund, Y., & Schapire, R. E. (1999). *Large Margin Classification Using the Perceptron Algorithm*. Machine Learning, 37(3), 277–296. (Used for the Averaged Perceptron in `src/perceptron.py`.)
+- Harris, C. R., et al. (2020). *Array programming with NumPy*. Nature, 585, 357–362. https://numpy.org/
+- Hunter, J. D. (2007). *Matplotlib: A 2D Graphics Environment*. Computing in Science & Engineering, 9(3), 90–95. https://matplotlib.org/
+- Python Standard Library Documentation (`csv`, `json`, `math`, `heapq`, `bisect`, `argparse`). https://docs.python.org/3/
 
 ---
 
