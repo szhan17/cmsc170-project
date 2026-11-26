@@ -40,11 +40,11 @@ NASA POWER daily point data (row 4 of the instructor's list of datasets), saved 
 - **Period:** January 1, 2001 to December 31, 2025 (9,131 days, no missing values)
 - **Source:** NASA Langley Research Center, POWER project, Daily API v2.10.2, community RE, accessed November 4, 2026
 - **Download URL:**
-  `https://power.larc.nasa.gov/api/temporal/daily/point?parameters=...&format=CSV`   ← unchanged
+  `https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN,T2MDEW,RH2M,QV2M,PS,WS2M,WS10M,WD10M,CLOUD_AMT,ALLSKY_SFC_SW_DWN,CLRSKY_SFC_SW_DWN,PRECTOTCORR&community=RE&longitude=121.24&latitude=14.17&start=20010101&end=20251231&format=CSV`
 
 Citation requested by NASA:
 
-> The data was obtained from ... NASA Earth Science Division.   ← unchanged
+> The data was obtained from National Aeronautics and Space Administration (NASA) Langley Research Center's Prediction Of Worldwide Energy Resources (POWER) project funded through the NASA Earth Science Division.
 
 ## Milestone 2 report: data preparation and implementation
 
